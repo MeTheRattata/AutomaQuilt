@@ -1,0 +1,26 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<canvas id="myCanvas" width="600" height="400" style="border:1px solid green"></canvas>
+
+
+
+<script>
+    var canvas = document.getElementById('myCanvas');
+    var ctx = canvas.getContext("2d");
+
+    var blocks =[['green', 'yellow'],['red', 'blue']];
+
+    for (var i = 0; i < blocks.length; i++)
+        for (var j = 0; j < blocks.length; j++)
+        {
+         ctx.fillStyle = blocks[i][j];
+         ctx.fillRect(0+ i*200, 0+ j * 200, 200, 200);
+        }
+
+
+
+</script>
