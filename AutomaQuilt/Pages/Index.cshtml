@@ -6,9 +6,27 @@
 
 <canvas id="myCanvas" width="600" height="600" style="border:1px solid green"></canvas>
 
-
+<div>
+<form>
+    <input type="button" value="Square" onclick="sqr()">
+</form>
+<form>
+    <input type="button" value="HST" onclick="hst()">
+</form>
+</div>
+<div>
+    <p id="value"></p>
+</div>
 
 <script>
+    function sqr() {
+        document.getElementById("value").innerHTML = "Square";
+    }
+    function hst() {
+        document.getElementById("value").innerHTML = "HST";
+    }
+
+    /*
     var canvas = document.getElementById('myCanvas');
     var ctx = canvas.getContext("2d");
 
@@ -28,4 +46,5 @@
     ctx.lineTo(blockSize, 0);
     ctx.lineTo(0, blockSize);
     ctx.fill();
+    */
 </script>
