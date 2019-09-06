@@ -12,53 +12,63 @@
 <form>
     <input type="button" value="HST" onclick="hst()">
 </form>
+    <form><input type ="button" value="Randomize" onclick="randomize()" /></form>
 </div>
 <div>
     <p id="value"></p>
+    <p id="test"></p>
 </div>
 
 <script>
+    var canvas = document.getElementById('myCanvas');
+    var ctx = canvas.getContext("2d");
+
+    var blockSize = 100;
+
     function sqr() {
         document.getElementById("value").innerHTML = "Square";
     }
     function hst() {
         document.getElementById("value").innerHTML = "HST";
     }
+    function randomColor() {
+        return "#000000".replace(/0/g,function(){return (~~(Math.random()*16)).toString(16);});
 
+    }
 
     function printSquare(x,y,color)
     {
         ctx.fillStyle = color;
-        ctx.fillRect(0 + i * blockSize, 0 + j * blockSize, blockSize, blockSize);
+        ctx.fillRect(x, y, blockSize, blockSize);
     }
     function printHST(x, y, color1, color2)
     {
-        ctx.fillStyle = color1;
         ctx.beginPath();
         ctx.moveTo(x, y);
-        ctx.lineTo(x, blockSize);
-        ctx.lineTo(blockSize, blockSize);
+        ctx.fillStyle = color1; 
+        ctx.lineTo(x, y + blockSize);
+        ctx.lineTo(x + blockSize, y + blockSize);
         ctx.fill();
-        ctx.fillStyle = color2;
+
         ctx.beginPath();
-        ctx.moveTo(x, y);
-        ctx.lineTo(blockSize, y);
-        ctx.lineTo(blockSize, blockSize);
+        ctx.moveTo(x + blockSize, y + blockSize);
+        ctx.fillStyle = color2;
+        ctx.lineTo(x + blockSize, y);
+        ctx.lineTo(x, y);
         ctx.fill();
     }
+
+    function randomize()
+    {
+        for (var i = 0; i < 6; i++)
+                for (var j = 0; j < 6; j++)
+                {
+                    if (Math.random() > 0.5)
+                    printSquare(i * blockSize, j * blockSize, randomColor());
+                    else
+                      printHST(i * blockSize, j * blockSize, randomColor(),randomColor());       
+                }
+    }
     
-    var canvas = document.getElementById('myCanvas');
-    var ctx = canvas.getContext("2d");
-
-    var blockSize = 300;
-    var blocks =[['green', 'yellow'],['red', 'blue']];
-
-    for (var i = 0; i < blocks.length; i++)
-        for (var j = 0; j < blocks.length; j++)
-        {
-            printSquare(0 + i, 0 + j,blocks[i][j]);
-        }
-
-   printHST(0,0,'orange','purple');
     
 </script>
